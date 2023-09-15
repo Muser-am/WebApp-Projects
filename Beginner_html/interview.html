@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <title>Login</title>
+  </head>
+  <body>
+    <h1>Login</h1>
+    <form action="/login" method="post">
+      <label for="username">Username:</label><br>
+      <input type="text" id="username" name="username"><br>
+      <label for="password">Password:</label><br>
+      <input type="password" id="password" name="password"><br><br>
+      <input type="submit" value="Submit">
+    </form> 
+
+        <title>Dashboard</title>
+        <h1>Welcome to the Dashboard</h1>
+    <p>Here you can see an overview of your account and access various features and tools.</p>
+    </form> 
+
+    <head>
+        <title>User Page</title>
+      </head>
+      <body>
+        <h1>User Page</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+            </tr>
+          </thead>
+          <tbody id="user-table">
+            <!-- data will be inserted here -->
+          </tbody>
+        </table>
+    <script>
+
+async function getUsers() {
+  try {
+    const response = await fetch('/mock-api/users');
+    const data = await response.json();
+    // do something with the data, such as displaying it in a table or list
+  } catch (error) {
+    console.error(error);
+  }
+}
+getUsers();
+async function getUsers() {
+  try {
+    const response = await fetch('/mock-api/users');
+    const data = await response.json();
+    const tableBody = document.getElementById('user-table');
+    data.forEach((user) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${user.id}</td>
+        <td>${user.name}</td>
+        <td>${user.email}</td>
+        <td>${user.phone}</td>
+      `;
+      tableBody.appendChild(row);
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+getUsers();
+
+    </script>
+  </body>
+</html>
